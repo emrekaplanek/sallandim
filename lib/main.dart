@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sallandim/screens/latest_earthquakes.dart';
-import 'package:sallandim/screens/todo.dart';
+import 'package:sallandim/screens/fav_earthquakes.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));

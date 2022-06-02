@@ -13,17 +13,7 @@ class _TodoState extends State<Todo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ElevatedButton(
-          onPressed: () {
-            RequestService.get("https://jsonplaceholder.typicode.com/todos/1")
-                .then((value) {
-              TodoModel todoModel = TodoModel.fromJson(value);
-            });
-          },
-          child: const Text("tek todo modeli"),
-        ),
-      ),
+      body: SafeArea(child: SizedBox()),
     );
   }
 }
