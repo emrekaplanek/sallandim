@@ -19,7 +19,6 @@ class _TodoState extends State<Todo> {
             RequestService.get("https://jsonplaceholder.typicode.com/todos/1")
                 .then((value) {
               TodoModel todoModel = TodoModel.fromJson(value);
-              print(todoModel.title);
             });
           },
           child: const Text("tek todo modeli"),

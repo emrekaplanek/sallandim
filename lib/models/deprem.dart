@@ -1,14 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 class Deprem {
   String tarih;
   String saat;
   String enlem;
   String boylam;
   String derinlik;
-  String buyuluk;
+  String buyukluk;
   String yer;
   String sehir;
   Deprem({
@@ -17,7 +15,7 @@ class Deprem {
     required this.enlem,
     required this.boylam,
     required this.derinlik,
-    required this.buyuluk,
+    required this.buyukluk,
     required this.yer,
     required this.sehir,
   });
@@ -29,7 +27,7 @@ class Deprem {
       'enlem': enlem,
       'boylam': boylam,
       'derinlik': derinlik,
-      'buyuluk': buyuluk,
+      'buyukluk': buyukluk,
       'yer': yer,
       'sehir': sehir,
     };
@@ -42,7 +40,7 @@ class Deprem {
       enlem: map['enlem'] ?? '',
       boylam: map['boylam'] ?? '',
       derinlik: map['derinlik'] ?? '',
-      buyuluk: map['buyuluk'] ?? '',
+      buyukluk: map['buyukluk'] ?? '',
       yer: map['yer'] ?? '',
       sehir: map['sehir'] ?? '',
     );
@@ -54,6 +52,6 @@ class Deprem {
 
   @override
   String toString() {
-    return 'Deprem(tarih: $tarih, saat: $saat, enlem: $enlem, boylam: $boylam, derinlik: $derinlik, buyuluk: $buyuluk, yer: $yer, sehir: $sehir)';
+    return 'Deprem(tarih: $tarih, saat: $saat, enlem: $enlem, boylam: $boylam, derinlik: $derinlik, buyukluk: $buyukluk, yer: $yer, sehir: $sehir)';
   }
 }
