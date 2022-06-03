@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sallandim/screens/latest_earthquakes.dart';
-import 'package:sallandim/screens/fav_earthquakes.dart';
+import 'package:sallandim/screens/critical_earthquakes.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Test API',
+      title: 'The Earthquakes',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Test API'),
+      home: const MyHomePage(title: 'The Earthquakes'),
     );
   }
 }
@@ -36,30 +36,50 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.amber.shade800,
       ),
       body: Column(
         children: [
           Center(
-            child: ElevatedButton(
-              child: const Text("Latest Earthquakes"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const LatestEarthquakes()),
-                );
-              },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  child: const Text("Latest Earthquakes"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amber.shade800,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LatestEarthquakes()),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
           Center(
-            child: ElevatedButton(
-              child: const Text("Tek Todo modeli"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Todo()),
-                );
-              },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  child: const Text("Critical Pinned Earthquakes"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amber.shade800,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CriticalEarthquakes()),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ],

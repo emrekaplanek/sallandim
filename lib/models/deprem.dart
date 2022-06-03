@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Deprem {
+class Earthquake {
   String tarih;
   String saat;
   String enlem;
@@ -9,7 +9,7 @@ class Deprem {
   String buyukluk;
   String yer;
   String sehir;
-  Deprem({
+  Earthquake({
     required this.tarih,
     required this.saat,
     required this.enlem,
@@ -33,8 +33,8 @@ class Deprem {
     };
   }
 
-  factory Deprem.fromMap(Map<String, dynamic> map) {
-    return Deprem(
+  factory Earthquake.fromMap(Map<String, dynamic> map) {
+    return Earthquake(
       tarih: map['tarih'] ?? '',
       saat: map['saat'] ?? '',
       enlem: map['enlem'] ?? '',
@@ -48,7 +48,8 @@ class Deprem {
 
   String toJson() => json.encode(toMap());
 
-  factory Deprem.fromJson(String source) => Deprem.fromMap(json.decode(source));
+  factory Earthquake.fromJson(String source) =>
+      Earthquake.fromMap(json.decode(source));
 
   @override
   String toString() {

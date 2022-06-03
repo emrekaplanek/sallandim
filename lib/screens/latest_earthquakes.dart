@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sallandim/repositories/earthquake_repository.dart';
 import 'package:sallandim/widgets/loading.dart';
 
-final eRepository = ChangeNotifierProvider(((ref) => EarthquakeRepository()));
-
 class LatestEarthquakes extends ConsumerStatefulWidget {
   const LatestEarthquakes({Key? key}) : super(key: key);
 
@@ -16,7 +14,9 @@ class LatestEarthquakes extends ConsumerStatefulWidget {
 class _LatestEarthquakesState extends ConsumerState<LatestEarthquakes> {
   @override
   void initState() {
-    ref.read(eRepository).getAllEarthquake();
+    if (ref.read(eRepository).earthquakeList.isEmpty) {
+      ref.read(eRepository).getAllEarthquake();
+    }
     super.initState();
   }
 
@@ -33,11 +33,10 @@ class _LatestEarthquakesState extends ConsumerState<LatestEarthquakes> {
           child: Column(
         children: [
           Row(
-            //mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Count: ${watch.depremList.length.toString()}"),
+                child: Text("Count: ${watch.earthquakeList.length.toString()}"),
               ),
               const Expanded(child: SizedBox()),
               Padding(
@@ -61,15 +60,19 @@ class _LatestEarthquakesState extends ConsumerState<LatestEarthquakes> {
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     Color? c = Colors.amber[50];
-                    if (double.parse(watch.depremList[index].buyukluk) > 3.5) {
-                      c = Colors.red[600];
-                    } else if (double.parse(watch.depremList[index].buyukluk) >
+                    if (double.parse(watch.earthquakeList[index].buyukluk) >
+                        3.5) {
+                      c = Colors.red[900];
+                    } else if (double.parse(
+                            watch.earthquakeList[index].buyukluk) >
                         3) {
                       c = Colors.red[400];
-                    } else if (double.parse(watch.depremList[index].buyukluk) >
+                    } else if (double.parse(
+                            watch.earthquakeList[index].buyukluk) >
                         2.5) {
                       c = Colors.red[200];
-                    } else if (double.parse(watch.depremList[index].buyukluk) >
+                    } else if (double.parse(
+                            watch.earthquakeList[index].buyukluk) >
                         2) {
                       c = Colors.amber[200];
                     }
@@ -77,17 +80,20 @@ class _LatestEarthquakesState extends ConsumerState<LatestEarthquakes> {
                       color: c,
                       child: ListTile(
                         leading: Text(
-                          watch.depremList[index].buyukluk,
+                          watch.earthquakeList[index].buyukluk,
                           style: const TextStyle(fontSize: 18),
                         ),
-                        title: Text(watch.depremList[index].yer),
-                        subtitle: Text(watch.depremList[index].saat),
+                        title: Text(watch.earthquakeList[index].yer),
+                        subtitle: Text(watch.earthquakeList[index].saat),
                         trailing: IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.star)),
+                            onPressed: () {
+                              read.addCritical(watch.earthquakeList[index]);
+                            },
+                            icon: const Icon(Icons.warning_amber_outlined)),
                       ),
                     );
                   },
-                  itemCount: watch.depremList.length),
+                  itemCount: watch.earthquakeList.length),
             ),
           ),
         ],
