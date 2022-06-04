@@ -6,6 +6,7 @@ import 'package:sallandim/models/deprem.dart';
 import 'package:sallandim/services/request_service.dart';
 
 final eRepository = ChangeNotifierProvider(((ref) => EarthquakeRepository()));
+final deepnessIsVisible = StateProvider<bool>(((ref) => false));
 
 class EarthquakeRepository extends ChangeNotifier {
   List<Earthquake> earthquakeList = [];

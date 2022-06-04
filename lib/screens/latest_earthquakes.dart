@@ -39,6 +39,17 @@ class _LatestEarthquakesState extends ConsumerState<LatestEarthquakes> {
                 child: Text("Count: ${watch.earthquakeList.length.toString()}"),
               ),
               const Expanded(child: SizedBox()),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amber.shade800,
+                  ),
+                  onPressed: (() {
+                    ref.read(deepnessIsVisible.state).state =
+                        !ref.read(deepnessIsVisible.state).state;
+                  }),
+                  child: ref.read(deepnessIsVisible.state).state
+                      ? const Text("Hide deepness")
+                      : const Text("Show deepness")),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
@@ -53,6 +64,8 @@ class _LatestEarthquakesState extends ConsumerState<LatestEarthquakes> {
               ),
             ],
           ),
+          if (ref.watch(deepnessIsVisible) == true)
+            const Text("deepness also shown in the list"),
           Expanded(
             child: Loading(
               isLoading: watch.isLoading,
@@ -84,7 +97,14 @@ class _LatestEarthquakesState extends ConsumerState<LatestEarthquakes> {
                           style: const TextStyle(fontSize: 18),
                         ),
                         title: Text(watch.earthquakeList[index].yer),
-                        subtitle: Text(watch.earthquakeList[index].saat),
+                        subtitle: Row(
+                          children: [
+                            Text("Time:${watch.earthquakeList[index].saat} "),
+                            if (ref.watch(deepnessIsVisible.state).state)
+                              Text(
+                                  "Deepness:${watch.earthquakeList[index].derinlik}"),
+                          ],
+                        ),
                         trailing: IconButton(
                             onPressed: () {
                               read.addCritical(watch.earthquakeList[index]);
