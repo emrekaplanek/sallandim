@@ -5,8 +5,47 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sallandim/models/deprem.dart';
 import 'package:sallandim/services/request_service.dart';
 
-final eRepository = ChangeNotifierProvider(((ref) => EarthquakeRepository()));
 final deepnessIsVisible = StateProvider<bool>(((ref) => false));
+final eRepository = ChangeNotifierProvider(((ref) => EarthquakeRepository()));
+
+final eRepositoryF = FutureProvider<List<Earthquake>?>(((ref) {
+  List<Earthquake> earthquakeList = [];
+  return RequestService.get("https://turkiyedepremapi.herokuapp.com/api").then(
+    (value) {
+      if (value != null) {
+        earthquakeList = (json.decode(value) as List)
+            .map((item) => Earthquake.fromMap(item))
+            .toList();
+        return earthquakeList;
+      } else {
+        return null;
+      }
+    },
+  );
+}));
+
+final eRepositoryF2 = FutureProvider(((ref) {
+  return (EarthquakeRepositoryFuture().getAllEarthquake());
+}));
+
+class EarthquakeRepositoryFuture {
+  List<Earthquake> earthquakeList = [];
+
+  Future<List<Earthquake>?> getAllEarthquake() async {
+    RequestService.get("https://turkiyedepremapi.herokuapp.com/api").then(
+      (value) {
+        if (value != null) {
+          earthquakeList = (json.decode(value) as List)
+              .map((item) => Earthquake.fromMap(item))
+              .toList();
+          return earthquakeList;
+        } else {
+          return null;
+        }
+      },
+    );
+  }
+}
 
 class EarthquakeRepository extends ChangeNotifier {
   List<Earthquake> earthquakeList = [];

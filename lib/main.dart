@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sallandim/screens/latest_earthquakes.dart';
 import 'package:sallandim/screens/critical_earthquakes.dart';
+import 'package:sallandim/screens/latest_eartquakes_future.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -76,6 +77,27 @@ class _MyHomePageState extends State<MyHomePage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const CriticalEarthquakes()),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  child: const Text("Latest Earthquakes with Future"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amber.shade800,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LatestEartquakesFuture()),
                     );
                   },
                 ),
